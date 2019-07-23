@@ -1,0 +1,6 @@
+Para agregar contenido:
+
+1.Te metes en la carpeta y creas archivos o carpetas.
+2.Terminal:
+  git add --all
+  git commit -m "Mensaje del commit"
