@@ -4,3 +4,4 @@ Para agregar contenido:
 2.Terminal:
   git add --all
   git commit -m "Mensaje del commit"
+  git push
