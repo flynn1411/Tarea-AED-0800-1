@@ -52,11 +52,11 @@ class ListaEnlazada:
                 return self.agregar(valor)
             
             else:
-                actual = self.primero.siguiente
-                anterior = self.primero
-                posicionActual = 1
+                actual = self.primero
+                anterior = None
+                posicionActual = 0
 
-                while(actual.siguiente):
+                while(actual):
                     if(posicion == posicionActual):
                         anterior.siguiente = Nodo(valor)
                         anterior.siguiente.siguiente = actual
@@ -65,6 +65,7 @@ class ListaEnlazada:
                     else:
                         anterior = actual
                         actual = actual.siguiente
+                        posicionActual += 1
             return False
 
     def obtenerLongitud(self):
@@ -79,13 +80,13 @@ class ListaEnlazada:
 
     def imprimirLista(self):
         camino = ""
-        actual = self.primero
+        nodoActual = self.primero
     
-        while(actual.siguiente):
-            camino = ("%s%s -> " %(camino, actual.valor))
-            actual = actual.siguiente
+        while(nodoActual.siguiente):
+            camino = ("%s%s -> " %(camino, nodoActual.valor))
+            nodoActual = nodoActual.siguiente
         
-        camino = ("%s%s -> None" %(camino, actual.valor))
+        camino = ("%s%s -> None" %(camino, nodoActual.valor))
     
         print(camino)
     

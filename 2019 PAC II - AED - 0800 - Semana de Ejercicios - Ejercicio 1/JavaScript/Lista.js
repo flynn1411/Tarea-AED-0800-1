@@ -16,7 +16,7 @@ function ListaEnlazada(){
     this.agregarNormal = ListaEnlazadaAgregarNormal;
     this.agregarEnPosicion = ListaEnlazadaAgregarEnPosicion;
     this.obtenerTamaño = ListaEnlazadaObtenerTamaño;
-    //this.imprimirLista = ListaEnlazadaImprimir;
+    this.imprimirLista = ListaEnlazadaImprimir;
 }
 
     function ListaEnlazadaAgregar(valor, posicion = null){
@@ -59,11 +59,11 @@ function ListaEnlazada(){
                 return this.agregar(valor);
             }
             else{
-                actual = this.primero.siguiente;
-                anterior = this.primero;
-                posicionActual = 1;
+                actual = this.primero;
+                anterior = null;
+                posicionActual = 0;
 
-                while(actual.siguiente){
+                while(actual){
                     if(posicion == posicionActual){
                         anterior.siguiente = new Nodo(valor);
                         anterior.siguiente.siguiente = actual;
@@ -72,6 +72,7 @@ function ListaEnlazada(){
                     else{
                         anterior = actual;
                         actual = actual.siguiente;
+                        posicionActual++;
                     }
                 }
             }
@@ -91,18 +92,18 @@ function ListaEnlazada(){
         return contador;
     }
 
-   /* function ListaEnlazadaImprimir(){
+   function ListaEnlazadaImprimir(){
         camino = " ";
     
-        actual = this.primero;
+        nodoActual = this.primero;
     
-        while(actual.siguiente){
-            camino = camino + actual.valor + " -> ";
+        while(nodoActual.siguiente){
+            camino = camino + nodoActual.valor + " -> ";
     
-            actual = actual.siguiente;
+            nodoActual = nodoActual.siguiente;
         }
     
-        camino = camino + actual.valor + " -> NULL";
+        camino = camino + nodoActual.valor + " -> NULL";
     
         console.log(camino);
-    } */
+    }

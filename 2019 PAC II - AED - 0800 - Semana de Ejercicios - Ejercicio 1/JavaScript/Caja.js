@@ -5,7 +5,7 @@ function Caja(){
     //metodos
     this.agregarFila = CajaAgregarFila;
     this.agregarObjeto = CajaAgregarObjeto;
-    //this.imprimir = CajaImprimir;
+    this.imprimir = CajaImprimir;
 }
 
     function CajaAgregarFila(){
@@ -26,16 +26,12 @@ function Caja(){
         return this.primerGrupo.valor.agregar(valor, posicion);
     }
 
-    /*
-    Función Experimental aun sin corregir
-
     function CajaImprimir(){
-        actual = this.primerGrupo;
+        grupoActual = this.primerGrupo;
 
-        while(actual.siguiente){
-            actual.valor.imprimirLista();
-            actual = actual.siguiente;
+        while(grupoActual.siguiente){
+            grupoActual.valor.imprimirLista();
+            grupoActual = grupoActual.siguiente;
         }
-        actual.valor.imprimirLista();
+        grupoActual.valor.imprimirLista();
     }
-     */

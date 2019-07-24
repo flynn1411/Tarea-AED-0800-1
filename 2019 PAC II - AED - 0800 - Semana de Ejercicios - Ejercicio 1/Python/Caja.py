@@ -23,19 +23,11 @@ class Caja:
         return self.primerGrupo.valor.agregar(valor, posicion)
     
     def imprimirCaja(self):
-        camino = ""
-        actual = self.primerGrupo
-    
-        while(actual.siguiente):
-            camino = ("%s%s -> " %(camino, actual.valor))
-            actual = actual.siguiente
+        grupoActual = self.primerGrupo
+
+        while(grupoActual.siguiente):
+            grupoActual.valor.imprimirLista()
+            print("\n")
+            grupoActual = grupoActual.siguiente
         
-        camino = ("%s%s -> None" %(camino, actual.valor))
-    
-        print(camino)
-    
-
-
-
-
-    
+        grupoActual.valor.imprimirLista()
