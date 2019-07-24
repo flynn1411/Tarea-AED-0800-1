@@ -1,4 +1,5 @@
 #Objetos
+# -*-coding: "utf-8" -*-
 
 class Lapiz:
     def __init__(self,marca, tipo):

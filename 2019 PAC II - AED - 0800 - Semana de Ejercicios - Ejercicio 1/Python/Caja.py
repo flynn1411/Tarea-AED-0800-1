@@ -1,43 +1,41 @@
-#Caja: pila de listas
-from ListaDoblementeEnlazada import *
+from Lista import*
 
 class Caja:
-    def __init__(self, altura = 3, longitud = 2):
+    
+    def __init__(self):
         self.primerGrupo = None
-        self.altura = altura
-        self.longitud = longitud
-        self.nivel = 1
+    
+    def agregarFila(self):
+        
+        if(not self.primerGrupo):
+            self.primerGrupo = Nodo(ListaEnlazada())
+            return True
+        
+        else:
+            pila = self.primerGrupo
+            self.primerGrupo = Nodo(ListaEnlazada())
+            self.primerGrupo.siguiente = pila
+            return True
+        
+        return False
 
-    def agregarObjeto(self, objeto, posicion = None):
-        pila = None
+    def agregarObjeto(self,valor, posicion = None):
+        return self.primerGrupo.valor.agregar(valor, posicion)
+    
+    def imprimirCaja(self):
+        camino = ""
+        actual = self.primerGrupo
+    
+        while(actual.siguiente):
+            camino = ("%s%s -> " %(camino, actual.valor))
+            actual = actual.siguiente
+        
+        camino = ("%s%s -> None" %(camino, actual.valor))
+    
+        print(camino)
+    
 
-        if (not posicion):
-            if(not self.primerGrupo):
-                self.primerGrupo = Nodo(ListaDoblementeEnlazada(self.longitud),self.nivel)
 
-                self.primerGrupo.valor.agregar(objeto)
 
-                return True
 
-            else:
-                if (self.primerGrupo.valor.tamaño == self.longitud):
-                    
-                    if(self.nivel == self.altura):
-                        return ("%s murió de una enfermedad que se curaba con vacunarlo." %(objeto))
-
-                    else:
-                        pila = self.primerGrupo
-                        self.primerGrupo = Nodo(ListaDoblementeEnlazada(self.longitud),self.nivel)
-                        self.primerGrupo.siguiente = pila
-                
-                        self.primerGrupo.valor.agregar(objeto)
-                        self.nivel += 1
-                        return True
-
-                else:
-                    self.primerGrupo.valor.agregar(objeto)
-                    return True
-
-        elif(posicion < self.longitud):
-            if(self.primerGrupo):
-                pass
+    

@@ -1,23 +1,28 @@
-# -*- coding: "utf-8" -*-
-
-from Objetos import*
 from Caja import*
+from Objetos import*
+
 
 caja = Caja()
 
+print(caja.agregarFila())
+print(caja.agregarObjeto(Lapiz("BIC","Mina")))
+print(caja.agregarObjeto(ResmaDePapel("Copan","Carta",200)))
+print(caja.agregarObjeto(Clips(1000,"Mediano")))
 
-print(caja.agregarObjeto(Lapiz("Stadtleder", "grafito")))
-print(caja.agregarObjeto(ResmaDePapel("Copán", "Carta", 500)))
-print(caja.agregarObjeto(Clips(50, "S")))
+print(caja.agregarFila())
+print(caja.agregarObjeto(Grapadora("Dell",500)))
+print(caja.agregarObjeto(Grapas(6000,"Medianas")))
+print(caja.agregarObjeto(Folder("Oficio","Plastico")))
 
-print(caja.agregarObjeto(Grapadora("Patito", 30)))
-print(caja.agregarObjeto(Grapas(30, "M")))
-print(caja.agregarObjeto(Folder("Carta", "Manila")))
+print(caja.agregarFila())
+print(caja.agregarObjeto(PostIts("Rosa",20)))
+print(caja.agregarObjeto(Marcador("BIC","Board")))
+print(caja.agregarObjeto(Borrador("Estudio","Goma")))
 
-print(caja.agregarObjeto(PostIts("Rosa", 50)))
-print(caja.agregarObjeto(Marcador("BiC", "Permanente")))
-print(caja.agregarObjeto(Borrador("BiC", "Goma")))
+print(caja.agregarFila())
+print(caja.agregarObjeto(Corrector("Penzoil","LiquidPaper")))
+print(caja.agregarObjeto(CintaAdhesiva("Botsch","Masking")))
 
-print(caja.agregarObjeto("NiñoSinVacunar"))
 
-print(caja.primerGrupo.siguiente.siguiente.valor.primero.valor.tipo)
+#caja.imprimirCaja()
+#caja.primerGrupo.valor.imprimirista()

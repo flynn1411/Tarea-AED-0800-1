@@ -16,7 +16,7 @@ class ListaEnlazada:
              
     def agregar(self,valor, posicion = None):
 
-        if(not posicion):
+        if(posicion is None):
             return self.agregarNormal(valor, self.primero)
                 
         else:
@@ -91,10 +91,3 @@ class ListaEnlazada:
     
     
     
-lista = ListaEnlazada()
-
-print(lista.agregar(15))
-print(lista.agregar(1))
-print(lista.agregar(3, 3))
-
-lista.imprimirLista()
