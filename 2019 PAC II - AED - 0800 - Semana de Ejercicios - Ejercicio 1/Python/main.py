@@ -5,6 +5,7 @@ from Caja import*
 
 caja = Caja()
 
+
 print(caja.agregarObjeto(Lapiz("Stadtleder", "grafito")))
 print(caja.agregarObjeto(ResmaDePapel("Copán", "Carta", 500)))
 print(caja.agregarObjeto(Clips(50, "S")))

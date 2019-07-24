@@ -3,20 +3,23 @@ class Nodo:
     def __init__(self, valor):
         self.valor = valor
         self.siguiente = None
+        self.anterior = None
 
 #Lista Enlazada
-class ListaEnlazada:
+class ListaDoblementeEnlazada:
     def __init__(self):
         self.primero = None
+        self.ultimo = None
         self.tamaño = 0
 
-    def agregar(self, valor):
-        return self.agregarEnLista(valor, self.primero)
+    def agregar(self, valor, posicion = None):
+        return self.agregarEnLista(valor)
 
-    def agregarEnLista(self, valor, actual):
-
+    def agregarEnLista(self, valor):
+        
         if (not self.primero):
             self.primero = Nodo(valor)
+            self.ultimo = self.primero
             self.tamaño += 1
             return True
 
