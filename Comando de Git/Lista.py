@@ -1,44 +1,37 @@
-/***********************Nodo********************************/
+#/***********************Nodo********************************/
 
-class Nodo
+class Nodo:
     def __init__(self, valor):
-    self.valor = valor
-    self.siguiente = None
+        self.valor = valor
+        self.siguiente = None
 
 
-/*********************Lista Enlazada**************************/
+#/*********************Lista Enlazada**************************/
 
 class ListaEnlazada:
-    def __init__(self):
+    def __init__(self,posicion):
         #atributo
         self.primero = None
-
-        #metodos
-        self.agregar = ListaEnlazadaAgregar
-        self.agregarNormal = ListaEnlazadaAgregarNormal
-        self.agregarEnPosicion = ListaEnlazadaAgregarEnPosicion
-        self.obtenerTamaño = ListaEnlazadaObtenerTamaño
-        self.imprimir = ListaEnlazadaImprimir
-
-class ListaEnlazadaAgregar:
-    
-    def __init__(self,valor, posicion = None):
+             
+    def ListaEnlazadaAgregar(self,valor, posicion = None):
 
         if(not posicion):
-            return self.agregarNormal(valor)
+            return self.ListaEnlazadaAgregarNormal(valor)
                 
         else:
-            return self.agregarEnPosicion(valor, posicion)
+            return self.ListaEnlazadaAgregarEnPosicion(valor,posicion)
 
     
-    def ListaEnlazadaAgregarNormal(self,valor, actual = self.primero):
+    def ListaEnlazadaAgregarNormal(self,valor, actual = None):
      
+        actual = self.primero
+        
         if(not self.primero):
             self.primero = Nodo(valor)
             return True
         
         elif(actual.siguiente):
-            return self.agregarNormal(valor,actual.siguiente)
+            return self.ListaEnlazadaAgregarNormal(valor,actual.siguiente)
     
         else:
             actual.siguiente = Nodo(valor)
@@ -47,16 +40,17 @@ class ListaEnlazadaAgregar:
         return False
 
     
-    def ListaEnlazadaAgregarEnPosicion(valor, posicion):
+    def ListaEnlazadaAgregarEnPosicion(self,valor, posicion):
+       
         if(posicion == 0):
             cola = self.primero
             self.primero = Nodo(valor)
             self.primero.siguiente = cola
             return True
         
-        else
-            if(posicion > self.obtenerTamaño()):
-                return self.agregar(valor)
+        else:
+            if(posicion > self.ListaEnlazadaObtenerTamaño()):
+                return self.ListaEnlazadaAgregar(valor)
             
             else:
                 actual = self.primero.siguiente
@@ -98,6 +92,6 @@ class ListaEnlazadaAgregar:
     
     
     
+lista = ListaEnlazada(None)
 
-        
-        
+print(lista.ListaEnlazadaAgregar(15))
