@@ -3,13 +3,11 @@ class Nodo:
     def __init__(self, valor):
         self.valor = valor
         self.siguiente = None
-        self.anterior = None
 
 #Lista Enlazada
-class ListaDoblementeEnlazada:
+class ListaEnlazada:
     def __init__(self):
         self.primero = None
-        self.ultimo = None
         self.tamaño = 0
 
     def agregar(self, valor, posicion = None):

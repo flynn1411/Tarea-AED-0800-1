@@ -59,7 +59,7 @@ class ListaDoblementeEnlazada:
                     actual.siguiente = comodin
                     
             actual = actual.siguiente
-            contador =+ 1
+            contador += 1
         
         
 
