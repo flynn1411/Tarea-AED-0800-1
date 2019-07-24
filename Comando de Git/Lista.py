@@ -1,3 +1,4 @@
+# -*-coding: "utf-8" -*-
 #/***********************Nodo********************************/
 
 class Nodo:
@@ -13,25 +14,23 @@ class ListaEnlazada:
         #atributo
         self.primero = None
              
-    def ListaEnlazadaAgregar(self,valor, posicion = None):
+    def agregar(self,valor, posicion = None):
 
         if(not posicion):
-            return self.ListaEnlazadaAgregarNormal(valor)
+            return self.agregarNormal(valor, self.primero)
                 
         else:
-            return self.ListaEnlazadaAgregarEnPosicion(valor,posicion)
+            return self.agregarEnPosicion(valor,posicion)
 
     
-    def ListaEnlazadaAgregarNormal(self,valor, actual = None):
-     
-        actual = self.primero
+    def agregarNormal(self,valor, actual = None):
         
         if(not self.primero):
             self.primero = Nodo(valor)
             return True
         
         elif(actual.siguiente):
-            return self.ListaEnlazadaAgregarNormal(valor,actual.siguiente)
+            return self.agregarNormal(valor,actual.siguiente)
     
         else:
             actual.siguiente = Nodo(valor)
@@ -40,7 +39,7 @@ class ListaEnlazada:
         return False
 
     
-    def ListaEnlazadaAgregarEnPosicion(self,valor, posicion):
+    def agregarEnPosicion(self,valor, posicion):
        
         if(posicion == 0):
             cola = self.primero
@@ -49,8 +48,8 @@ class ListaEnlazada:
             return True
         
         else:
-            if(posicion > self.ListaEnlazadaObtenerTamaño()):
-                return self.ListaEnlazadaAgregar(valor)
+            if(posicion > self.obtenerLongitud()):
+                return self.agregar(valor)
             
             else:
                 actual = self.primero.siguiente
@@ -68,7 +67,7 @@ class ListaEnlazada:
                         actual = actual.siguiente
             return False
 
-    def ListaEnlazadaObtenerTamaño(self):
+    def obtenerLongitud(self):
         contador = 1
         actual = self.primero
 
@@ -78,15 +77,15 @@ class ListaEnlazada:
         
         return contador
 
-    def ListaEnlazadaImprimir(self):
-        camino = " "
+    def imprimirLista(self):
+        camino = ""
         actual = self.primero
     
         while(actual.siguiente):
-            camino = camino + actual.valor + " -> "
+            camino = ("%s%s -> " %(camino, actual.valor))
             actual = actual.siguiente
         
-        camino = camino + actual.valor + " -> NULL"
+        camino = ("%s%s -> None" %(camino, actual.valor))
     
         print(camino)
     
@@ -94,4 +93,8 @@ class ListaEnlazada:
     
 lista = ListaEnlazada(None)
 
-print(lista.ListaEnlazadaAgregar(15))
+print(lista.agregar(15))
+print(lista.agregar(1))
+print(lista.agregar(3, 3))
+
+lista.imprimirLista()
