@@ -16,11 +16,11 @@ function ListaEnlazada(){
     this.agregarNormal = ListaEnlazadaAgregarNormal;
     this.agregarEnPosicion = ListaEnlazadaAgregarEnPosicion;
     this.obtenerTamaño = ListaEnlazadaObtenerTamaño;
-    this.imprimir = ListaEnlazadaImprimir;
+    //this.imprimirLista = ListaEnlazadaImprimir;
 }
 
     function ListaEnlazadaAgregar(valor, posicion = null){
-        if(!posicion){
+        if(posicion == null){
             return this.agregarNormal(valor);
         }
         else{
@@ -91,7 +91,7 @@ function ListaEnlazada(){
         return contador;
     }
 
-    function ListaEnlazadaImprimir(){
+   /* function ListaEnlazadaImprimir(){
         camino = " ";
     
         actual = this.primero;
@@ -105,4 +105,4 @@ function ListaEnlazada(){
         camino = camino + actual.valor + " -> NULL";
     
         console.log(camino);
-    }
+    } */

@@ -18,4 +18,27 @@
     cinta = new CintaAdhesiva("Botsch", "Aislante");
 
     //Agregar objetos a la caja
+    caja = new Caja();
+
+    caja.agregarFila();
+    caja.agregarObjeto(lapiz);
+    caja.agregarObjeto(resma);
+    caja.agregarObjeto(clips);
+
+    caja.agregarFila();
+    caja.agregarObjeto(grapadora);
+    caja.agregarObjeto(grapas);
+    caja.agregarObjeto(folder);
+
+    caja.agregarFila();
+    caja.agregarObjeto(postIts);
+    caja.agregarObjeto(marcador);
+    caja.agregarObjeto(borrador);
+
+    caja.agregarFila();
+    caja.agregarObjeto(corrector);
+    caja.agregarObjeto(cinta, 0);
+
+    console.log(caja);
+
 </script>

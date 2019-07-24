@@ -10,7 +10,7 @@ class Nodo:
 #/*********************Lista Enlazada**************************/
 
 class ListaEnlazada:
-    def __init__(self,posicion):
+    def __init__(self):
         #atributo
         self.primero = None
              
@@ -91,7 +91,7 @@ class ListaEnlazada:
     
     
     
-lista = ListaEnlazada(None)
+lista = ListaEnlazada()
 
 print(lista.agregar(15))
 print(lista.agregar(1))

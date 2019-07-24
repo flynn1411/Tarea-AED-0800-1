@@ -5,6 +5,7 @@ function Caja(){
     //metodos
     this.agregarFila = CajaAgregarFila;
     this.agregarObjeto = CajaAgregarObjeto;
+    //this.imprimir = CajaImprimir;
 }
 
     function CajaAgregarFila(){
@@ -24,3 +25,17 @@ function Caja(){
     function CajaAgregarObjeto(valor, posicion = null){
         return this.primerGrupo.valor.agregar(valor, posicion);
     }
+
+    /*
+    Función Experimental aun sin corregir
+
+    function CajaImprimir(){
+        actual = this.primerGrupo;
+
+        while(actual.siguiente){
+            actual.valor.imprimirLista();
+            actual = actual.siguiente;
+        }
+        actual.valor.imprimirLista();
+    }
+     */
