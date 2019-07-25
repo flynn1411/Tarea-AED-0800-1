@@ -1,0 +1,113 @@
+<meta charset="utf-8">
+<script>
+	function Node(contact){
+		this.contact = contact;
+		this.left = null;
+		this.right = null;
+	}
+	function BST(){
+		this.root = null;
+		this.add = BSTAdd;
+		this.search = BSTSearch;
+		this.print = BSTPrint;
+		this.delete = DeleteContact;
+	}
+		function BSTAdd(value,current = this.root){
+			if(!this.root){
+				this.root = new Node(value);
+				return true;
+			}else{
+				//Si la raiz es mayor que el valor a agregar
+				if(current.contact>value){
+				//Agrega a la izquierda
+				//verifico si la izquierda esta vacia
+					if(!current.left){
+						current.left = new Node(value);
+						return true;
+					}else{
+						//Si la izquierda no esta vacia
+						//Entonces agrego el nuevo nodo
+						//tomamos en cuenta que el nodo actual
+						//que es el nodo izquierdo es mi nuevo root
+						return this.add(value,current.left);
+					}
+
+				}else if(current.contact<value){
+					if(!current.right){
+						current.right = new Node(value);
+						return true;
+					}else{
+						return this.add(value,current.right);
+					}
+				}
+			}
+			return false;
+		}
+		function DeleteContact(contact,node=this.root){
+			if(contact == node.contact){
+				left = node.left
+				node = node.right
+				this.add(left,node)
+			}
+			else{
+				parent = this.search(contact)
+				if(parent.right.contact == contact){
+					left = parent.right.left
+					parent.right = parent.right.right
+					this.add(left,parent.right)
+					return true
+				}
+				else if(parent.left.contact == contact){
+					left = parent.left.left
+					parent.left = parent.left.right
+					this.add(left,parent.left)
+					return true
+				}
+			}
+			return false
+
+		}
+
+		function BSTSearch(contact,parent = this.root){
+			if(!parent){
+				return false;
+			}else{
+				if(parent.left){
+					if(parent.left.contact == contact){
+						return parent;
+					}
+				}
+				else if(parent.right){
+					if(parent.right.contact == contact){
+						return parent;
+					}
+				}else if(parent.contact>contact){
+					return this.search(contact,parent.left);
+				}else{
+					return this.search(contact,parent.right);
+				}
+			}
+			return false;
+		}
+		function BSTPrint(current = this.root){
+			if(current){
+				BSTPrint(current.left)
+				console.log(current.contact);
+				BSTPrint(current.right)
+			}
+		}
+	BTree = new BST();
+	BTree.add(5);
+	BTree.add(4);
+	BTree.add(8);
+	BTree.add(2);
+	BTree.add(1);
+	BTree.add(9);
+	BTree.add(0);
+	BTree.add(3);
+	BTree.add(10);
+	BTree.print();
+	BTree.delete(5);
+	BTree.print()
+	
+</script>
