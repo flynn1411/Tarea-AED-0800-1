@@ -48,15 +48,11 @@ function BST(){
 
     function BSTPrint(current = this.root, trail =""){
         if(current){
-            if(current.left){
-                this.print(current.left, trail);
-            }
-            trail = trail + current.value.name + ": " + current.value.number + "\n";
 
-            if(current.right){
-                this.print(current.right, trail);
-            }
+            trail += this.print(current.left, trail) + current.value.name + ": " + current.value.number + "\n" + this.print(current.right, trail);
+
         }
+        return trail;
     }
     
 /***********Para el arbol ordenado numericamente*********************/
@@ -134,7 +130,7 @@ function BST(){
             return true;
         }
         else{
-            var parent = this.searchNumerically(deleteValue);
+            var parent = this.searchNumerically(deleteValue).parent;
             if(parent.right){
                 if(parent.right.value.number == deleteValue){
                         left = parent.right.left;
@@ -241,7 +237,7 @@ if(deleteValue == this.root.value.name){
     return true;
 }
 else{
-    var parent = this.searchAlphabetically(deleteValue);
+    var parent = this.searchAlphabetically(deleteValue).parent;
     if(parent.right){
         if(parent.right.value.name == deleteValue){
                 left = parent.right.left;

@@ -56,29 +56,62 @@ function Directory(){
         wasAddedAlphabetically = this.alphabeticalTree.addAlphabetically(new Node(new Contact(name, number)));
 
         if(wasAddedNumerically && wasAddedAlphabetically){
-            prompt(`El contacto ${name}: ${number} fue agregado exitosamente.`);
+            alert(`El contacto ${name}: ${number} fue agregado exitosamente.`);
         }
         else{
-            prompt(`El contacto ${name}: ${number} ya existe`);
+            alert(`El contacto ${name}: ${number} ya existe`);
         }
     }
 
     function DirectorySearchPrompt(){
-        alert("Buscando Nodo");
+        wasFound = null;
+        searchBy = prompt("Desea buscar el contacto por:\n1.Nombre\n2.Número");
+        if(searchBy == "1"){
+            searchValue = prompt("Ingrese el nombre:");
+            wasFound = this.alphabeticalTree.searchAlphabetically(searchValue);
+        }
+        else{
+            searchValue = prompt("Ingrese el número:");
+            wasFound = this.numericalTree.searchNumerically(searchValue);
+        }
+
+        if(wasFound){
+            alert(`${wasFound.value.name}: ${wasFound.value.number}`);
+        }
+        else{
+            alert(`El contacto no existe en el directorio.`);
+        }
     }
 
     function DirectoryDeletePrompt(){
-        alert("Borrando Nodo");
+        wasDeleted = null;
+        deleteBy = prompt("Desea borrar el contacto por:\n1.Nombre\n2.Número");
+        if(deleteBy == "1"){
+            deleteValue = prompt("Ingrese el nombre:");
+            wasDeleted = this.alphabeticalTree.deleteAlphabetically(deleteValue);
+        }
+        else{
+            deleteValue = prompt("Ingrese el número:");
+            wasDeleted = this.numericalTree.deleteNumerically(deleteValue);
+        }
+
+        if(wasDeleted){
+            alert(`El contacto deseado fue borrado.`);
+        }
+        else{
+            alert(`El contacto no existe en el directorio.`);
+        }
+
     }
 
     function DirectoryPrintPrompt(){
         printFormat = prompt("Desea verlo por:\n1.Orden Alfabético\n2.Orden Numerico");
         
         if(printFormat == "1"){
-            this.alphabeticalTree.print();
+            alert(this.alphabeticalTree.print());
         }
         else{
-            this.numericalTree.print();
+            alert(this.numericalTree.print());
         }
     }
 
