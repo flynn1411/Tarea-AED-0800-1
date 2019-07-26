@@ -5,18 +5,28 @@ class Node:
         self.left = None
         self.right = None
 
+        self.parent = None
+
 #                            *****Arbol Binario******
 class BST:
     def __init__(self):
         
         self.root = None
 
-    def BSTSearch(self,value, typeOfValue):
+    def search(self,value, typeOfValue):
             if(typeOfValue == "number"):
                 return self.searchNumerically(value,self.root)
             
             else:
                 return self.searchAlphabetically(value,self.root)
+
+    def _print(self):
+        return self._printInner(self.root)
+
+    def _printInner(self, current, trail = ""):
+        if(current):
+            trail += ("%s%s: %s \n %s" %(self._printInner(current.left, trail), current.value.name, current.value.number, self._printInner(current.right, trail)))
+        return trail
             
 
 
@@ -41,6 +51,7 @@ class BST:
                 
                 else:
                     current.left = newNode
+                    current.left.parent = current
                     return True
                 
             
@@ -50,6 +61,7 @@ class BST:
                 
                 else:
                     current.right = newNode
+                    current.right.parent = current
                     return True
                    
         return False
@@ -78,67 +90,49 @@ class BST:
                 else:
                     return False
     
-    def BSTDeleteNumerically(self,value, current):
-        if(not self.root):
-            return False
-        
-        elif(self.searchNumerically(value,current)):
-            return False
-        
+    def deleteNumerically(self,deleteValue):
+        if(deleteValue is self.root.value.number):
+            left = self.root.left
+            right = self.root.right
+            self.root = None
+            if(right):
+                self.addNumerically(right)
+
+            if(left):
+                self.addNumerically(left)
+
+            return True
         else:
-            if(self.root.value.number == value):
-                leftChildren = self.root.left
-                rightChildren = self.root.right
-
-                self.root = None
-
-                if(rightChildren):
-                    self.addNumerically(rightChildren)
-                
-                if(leftChildren):
-                    self.addNumerically(leftChildren)
-                
-                return True
-            
-
-            elif(current.value.number > value):
-                if(current.left):
-                    if(current.left.value.number == value):
-                        leftChildren = current.left
-                        rightChildren = current.right
-
-                        current.left = None
-
-                        if(rightChildren):
-                            self.addNumerically(rightChildren)
-                        
-                        if(leftChildren):
-                            self.addNumerically(leftChildren)
-                        
-                        return True
+            parent = self.searchNumerically(deleteValue, self.root).parent
+            if(parent.right):
+                if(parent.right.value.number is deleteValue):
+                    left = parent.right.left
+                    right = parent.right.right
+                    parent.right = None
                     
-                    else:
-                        return self.BSTDeleteNumerically(value, current.left)
-             
-            else:
-                if(current.value.number > value):
-                    if(current.right):
-                        if(current.right.value.number == value):
-                            leftChildren = current.left
-                            rightChildren = current.right
+                    if(right):
+                        self.addNumerically(right)
+        
+                    if(left):
+                        self.addNumerically(left)
+        
+                    return True
+    
 
-                            current.right = None
-
-                            if(rightChildren):
-                                self.addNumerically(rightChildren)
-                            
-                            if(leftChildren):
-                                self.addNumerically(leftChildren)
-                            
-                            return True
-                        
-                        else:
-                            return self.BSTDeleteNumerically(value, current.right)
+            elif(parent.left):
+                if(parent.left.value.number is deleteValue):
+                    left = parent.left.left
+                    right = parent.left.right
+                    parent.left = None
+                    if(right):
+                        self.addNumerically(right)
+        
+                    if(left):
+                        self.addNumerically(left)
+        
+                    return True
+    
+        return False
     
     
     
@@ -178,7 +172,7 @@ class BST:
 
     def searchAlphabetically(self,searchValue,current):
         if(not self.root):
-            return True
+            return None
         
         else:
             if(current.searchvalue.name == searchValue):
@@ -189,11 +183,56 @@ class BST:
                     return self.searchNumerically(searchValue, current.left)
                 
                 else:
-                    return False
+                    return None
                 
             else:
                 if(current.right):
                     return self.searchNumerically(searchValue, current.right)
                 
                 else:
-                    return False
+                    return None
+
+    def deleteAlphabetically(self,deleteValue):
+        if(deleteValue is self.root.value.name):
+            left = self.root.left
+            right = self.root.right
+            self.root = None
+            if(right):
+                self.addNumerically(right)
+
+            if(left):
+                self.addNumerically(left)
+
+            return True
+        else:
+            parent = self.searchNumerically(deleteValue, self.root).parent
+            if(parent.right):
+                if(parent.right.value.name is deleteValue):
+                    left = parent.right.left
+                    right = parent.right.right
+                    parent.right = None
+                    
+                    if(right):
+                        self.addNumerically(right)
+        
+                    if(left):
+                        self.addNumerically(left)
+        
+                    return True
+    
+
+            elif(parent.left):
+                if(parent.left.value.name is deleteValue):
+                    left = parent.left.left
+                    right = parent.left.right
+                    parent.left = None
+                    if(right):
+                        self.addNumerically(right)
+        
+                    if(left):
+                        self.addNumerically(left)
+        
+                    return True
+    
+        return False
+    

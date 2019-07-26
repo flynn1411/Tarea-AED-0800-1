@@ -1,101 +1,112 @@
-/***********************Nodo*************************/
+/***************Nodo***************/
 function Node(value){
-		this.value = value;
-		this.left = null;
-		this.right = null;
-    }
-    
-/**********************Arból Binario******************/
-function BST(){
-	this.root = null;
+    this.value = value;
 
-	this.add = BSTAdd;
-	this.search = BSTSearch;
-	this.print = BSTPrint;
-	this.delete = BSTDeleteContact;
+    this.left = null;
+    this.right = null;
+    this.parent = null;
 }
 
-	function BSTAdd(newNode, current = this.root){
-		if(!this.root){
-			this.root = newNode;
-			return true;
-		}else{
-			//Si la raiz es mayor que el valor a agregar
-			if(current.value.number > value.number){
-			//Agrega a la izquierda
-			//verifico si la izquierda esta vacia
-				if(!current.left){
-					current.left = newNode;
-					return true;
-				}else{
-                    //Si la izquierda no esta vacia
-                    //Entonces agrego el nuevo nodo
-                    //tomamos en cuenta que el nodo actual
-                    //que es el nodo izquierdo es mi nuevo root
-                    return this.add(value, current.left);
-				}
+/**Arbol Binario**/
+function BST(){
+    this.root = null;
 
-            }
+    this.search = BSTSearch;
+    this.delete = BSTDelete;
+    this.print = BSTPrint;
 
-            else if(current.value.number < value.number){
-				if(!current.right){
-					current.right = newNode;
-					return true;
-                }
-                else{
-					return this.add(value,current.right);
-				}
-			}
-		}
-		return false;
+    //Numerico
+    this.addNumerically = BSTAddNumerically;
+    this.searchNumerically = BSTSearchNumerically;
+    this.deleteNumerically = BSTDeleteNumerically;
+
+    //Alfabetico
+    this.addAlphabetically = BSTAddAlphabetically;
+    this.searchAlphabetically = BSTSearchAlphabetically;
+    this.deleteAlphabetically = BSTDeleteAlphabetically;
+}
+
+    
+
+    function BSTSearch(value, typeOfValue){
+        if(typeOfValue == "number"){
+            return this.searchNumerically(value);
+        }
+        else{
+            return this.searchAlphabetically(value);
+        }
     }
 
-	function BSTDeleteContact(number, node=this.root){
-		if(number == node.number){
-			left = node.left
-			node = node.right
-			this.add(left,node)
-		}
-		else{
-			parent = this.search(number)
-			if(parent.right.number == number){
-				left = parent.right.left
-				parent.right = parent.right.right
-				this.add(left,parent.right)
-				return true
-			}
-			else if(parent.left.number == number){
-				left = parent.left.left
-				parent.left = parent.left.right
-				this.add(left,parent.left)
-				return true
-			}
-		}
-		return false
-	}
+    function BSTDelete(value, typeOfValue){
+        if(typeOfValue == "number"){
+            return this.deleteNumerically(value);
+        }
+        else{
+            return this.deleteAlphabetically(value);
+        }
+    }
 
-    function BSTSearch(number, parentNode = this.root){
+    function BSTPrint(current = this.root, trail =""){
+        if(current){
+
+            trail += this.print(current.left, trail) + current.value.name + ": " + current.value.number + "\n" + this.print(current.right, trail);
+
+        }
+        return trail;
+    }
+    
+/***********Para el arbol ordenado numericamente*********************/
+    function BSTAddNumerically(newNode, current = this.root){
+            if(!this.root){
+                this.root = newNode;
+                return true;
+            }
+
+            else{
+                if(current.value.number > newNode.value.number){
+                    if(current.left){
+                        return this.addNumerically(newNode, current.left);
+                    }
+                    else{
+                        current.left = newNode;
+                        current.left.parent = current;
+                        return true;
+                    }
+                }
+                else{
+                    if(current.right){
+                        return this.addNumerically(newNode, current.right);
+                    }
+                    else{
+                        current.right = newNode;
+                        current.right.parent = current;
+                        return true;
+                    }
+                }
+            }
+            return false;
+    }
+
+    function BSTSearchNumerically(value, current = this.root){
         if(!this.root){
             return null;
         }
-    
         else{
-            if(parentNode.value.number == number){
-                return parentNode;
+            if(current.value.number == value){
+                return current;
             }
-    
-            else if(parentNode.value.number > number){
-                if(parentNode.left){
-                    return this.search(number, parentNode.left);
+            else if(current.value.number > value){
+                if(current.left){
+                    return this.searchNumerically(value, current.left);
                 }
                 else{
                     return null;
                 }
             }
-    
+
             else{
-                if(parentNode.right){
-                    return this.search(number, parent.right);
+                if(current.right){
+                    return this.searchNumerically(value, current.right);
                 }
                 else{
                     return null;
@@ -103,17 +114,161 @@ function BST(){
             }
         }
     }
-        
 
-		function BSTPrint(current = this.root){
-			if(current){
-                if(current.left){
-                    this.print(current.left);
-                }
-                console.log(current.value.name + ": " + current.value.number);
 
-                if(current.right){
-                    this.print(current.right);
+    function BSTDeleteNumerically(deleteValue){
+        if(deleteValue == this.root.value.number){
+            left = this.root.left;
+            right = this.root.right;
+            this.root = null;
+            if(right){
+                this.addNumerically(right);
+            }
+            if(left){
+                this.addNumerically(left);
+            }
+            return true;
+        }
+        else{
+            var parent = this.searchNumerically(deleteValue).parent;
+            if(parent.right){
+                if(parent.right.value.number == deleteValue){
+                        left = parent.right.left;
+                        right = parent.right.right;
+                        parent.right = null;
+                    if(right){
+                        this.addNumerically(right);
+                    }
+                    if(left){
+                        this.addNumerically(left);
+                    }
+                    return true;
                 }
-			}
-		}
+            }
+            else if(parent.left){
+                if(parent.left.value.number == deleteValue){
+                        left = parent.left.left;
+                        right = parent.left.right;
+                        parent.left = null;
+                    if(right){
+                        this.addNumerically(right);
+                    }
+                    if(left){
+                        this.addNumerically(left);
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+
+    }
+
+/***********Para el arbol ordenado alfabeticamente*********************/
+function BSTAddAlphabetically(newNode, current = this.root){
+    if(!this.root){
+        this.root = newNode;
+        return true;
+    }
+
+    else{
+        if(current.value.name > newNode.value.name){
+            if(current.left){
+                return this.addAlphabetically(newNode, current.left);
+            }
+            else{
+                current.left = newNode;
+                current.left.parent = current;
+                return true;
+            }
+        }
+        else{
+            if(current.right){
+                return this.addAlphabetically(newNode, current.right);
+            }
+            else{
+                current.right = newNode;
+                current.right.parent = current;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+function BSTSearchAlphabetically(value, current = this.root){
+if(!this.root){
+    return null;
+}
+else{
+    if(current.value.name == value){
+        return current;
+    }
+    else if(current.value.name > value){
+        if(current.left){
+            return this.searchAlphabetically(value, current.left);
+        }
+        else{
+            return null;
+        }
+    }
+
+    else{
+        if(current.right){
+            return this.searchAlphabetically(value, current.right);
+        }
+        else{
+            return null;
+        }
+    }
+    }
+}
+
+
+function BSTDeleteAlphabetically(deleteValue){
+if(deleteValue == this.root.value.name){
+    left = this.root.left;
+    right = this.root.right;
+    this.root = null;
+    if(right){
+        this.addAlphabetically(right);
+    }
+    if(left){
+        this.addAlphabetically(left);
+    }
+    return true;
+}
+else{
+    var parent = this.searchAlphabetically(deleteValue).parent;
+    if(parent.right){
+        if(parent.right.value.name == deleteValue){
+                left = parent.right.left;
+                right = parent.right.right;
+                parent.right = null;
+            if(right){
+                this.addAlphabetically(right);
+            }
+            if(left){
+                this.addAlphabetically(left);
+            }
+            return true;
+        }
+    }
+    else if(parent.left){
+        if(parent.left.value.name == deleteValue){
+                left = parent.left.left;
+                right = parent.left.right;
+                parent.left = null;
+            if(right){
+                this.addAlphabetically(right);
+            }
+            if(left){
+                this.addAlphabetically(left);
+            }
+            return true;
+        }
+    }
+}
+return false;
+
+}   
