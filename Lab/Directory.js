@@ -72,7 +72,14 @@ function Directory(){
     }
 
     function DirectoryPrintPrompt(){
-        alert("Imprimiendo Arbol");
+        printFormat = prompt("Desea verlo por:\n1.Orden Alfabético\n2.Orden Numerico");
+        
+        if(printFormat == "1"){
+            this.alphabeticalTree.print();
+        }
+        else{
+            this.numericalTree.print();
+        }
     }
 
     
