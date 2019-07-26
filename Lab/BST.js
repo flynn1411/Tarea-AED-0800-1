@@ -46,15 +46,15 @@ function BST(){
         }
     }
 
-    function BSTPrint(current = this.root){
+    function BSTPrint(current = this.root, trail =""){
         if(current){
             if(current.left){
-                this.print(current.left);
+                this.print(current.left, trail);
             }
-            console.log(current.value.name + ": " + current.value.number);
+            trail = trail + current.value.name + ": " + current.value.number + "\n";
 
             if(current.right){
-                this.print(current.right);
+                this.print(current.right, trail);
             }
         }
     }
